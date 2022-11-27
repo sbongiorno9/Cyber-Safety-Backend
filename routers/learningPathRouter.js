@@ -2,14 +2,14 @@ const express = require('express')
 const learningPathRouter = express.Router()
 const learningPathController = require('../controllers/learningPathController')
 
-learningPathRouter.get('/', learningPathController.getArticles)
+learningPathRouter.get('/', learningPathController.getLearningPaths)
 
-learningPathRouter.get('/:id', learningPathController.getOneArticle)
+learningPathRouter.get('/:id', learningPathController.getOneLearningPath)
 
-learningPathRouter.post('/', learningPathController.createArticle)
+learningPathRouter.post('/', learningPathController.createLearningPath)
 
-learningPathRouter.patch('/:id', learningPathController.updateArticle)
+learningPathRouter.patch('/:id', learningPathController.updateLearningPath)
 
-learningPathRouter.delete('/:id', learningPathController.deleteArticle)
+learningPathRouter.delete('/:id', learningPathController.deleteLearningPath)
 
 module.exports = learningPathRouter

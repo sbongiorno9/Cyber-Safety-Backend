@@ -14,6 +14,18 @@ const app = express()
 const PORT = process.env.PORT
 const DEV_URI = process.env.DEV_DB
 
+//bring in routers
+const adminRouter = require('./routers/adminRouter')
+const articleRouter = require('./routers/articleRouter')
+const checklistRouter = require('./routers/checklistRouter')
+const learningPathRouter = require('./routers/learningPathRouter')
+
+//app.use('/')
+app.use('/admin', adminRouter)
+app.use('/articles', articleRouter)
+app.use('/checklists', checklistRouter)
+app.use('/learning-paths', learningPathRouter)
+
 mongoose.connect(DEV_URI).then(() => {
     console.log('Connected to Development Database')
 })
