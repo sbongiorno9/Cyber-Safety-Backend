@@ -32,7 +32,7 @@ exports.createAdmin = (req, res) => {
         })
 
     newAdmin.save()
-    .then(admin => {
+    .then(() => {
         return res.status(206).json({message: 'Admin created'})
     })
     .catch(err => {

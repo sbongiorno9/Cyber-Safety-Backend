@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 
 //create app
 const app = express()
-
+app.use(cors())
 //bring in variables from .env file
 const PORT = process.env.PORT
 const DEV_URI = process.env.DEV_DB
@@ -20,12 +20,7 @@ const articleRouter = require('./routers/articleRouter')
 const checklistRouter = require('./routers/checklistRouter')
 const learningPathRouter = require('./routers/learningPathRouter')
 
-//app.use('/')
-app.use('/admin', adminRouter)
-app.use('/articles', articleRouter)
-app.use('/checklists', checklistRouter)
-app.use('/learning-paths', learningPathRouter)
-
+//db connection
 mongoose.connect(DEV_URI).then(() => {
     console.log('Connected to Development Database')
 })
@@ -33,11 +28,25 @@ mongoose.connect(DEV_URI).then(() => {
     console.error(err)
 })
 
-app.use(cors())
+//app.use('/')
+app.use('/admin', adminRouter)
+app.use('/articles', articleRouter)
+app.use('/checklists', checklistRouter)
+app.use('/learning-paths', learningPathRouter)
+
+const Schema = mongoose.Schema
+const demo = mongoose.model('demo', new Schema({ message: String }))
+app.get('/demo', (req, res) => {
+    demo.find().then(entries => {
+        res.status(211).json(entries)
+    })
+})
+
+
 
 //set app to listen on port in .env file
 app.listen(PORT, () => {
-    console.log(`Server Running`)
+    console.log(`Server Running on port ${PORT}`)
 })
 
 
