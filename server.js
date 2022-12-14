@@ -18,7 +18,8 @@ const DEV_URI = process.env.DEV_DB
 const adminRouter = require('./routers/adminRouter')
 const articleRouter = require('./routers/articleRouter')
 const checklistRouter = require('./routers/checklistRouter')
-const learningPathRouter = require('./routers/learningPathRouter')
+const learningPathRouter = require('./routers/learningPathRouter');
+const contentRouter = require('./routers/contentRouter');
 
 //db connection
 mongoose.connect(DEV_URI).then(() => {
@@ -33,6 +34,7 @@ app.use('/admin', adminRouter)
 app.use('/articles', articleRouter)
 app.use('/checklists', checklistRouter)
 app.use('/learning-paths', learningPathRouter)
+app.use('/content', contentRouter)
 
 const Schema = mongoose.Schema
 const demo = mongoose.model('demo', new Schema({ message: String }))
@@ -42,11 +44,9 @@ app.get('/demo', (req, res) => {
     })
 })
 
-
-
 //set app to listen on port in .env file
 app.listen(PORT, () => {
-    console.log(`Server Running on port ${PORT}`)
+    console.log(`Server Running ${PORT}`)
 })
 
 
