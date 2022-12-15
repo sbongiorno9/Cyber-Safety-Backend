@@ -30,5 +30,6 @@ jobs:
           script: |
             mkdir test
             cd test
+            ssh-keyscan -H ${{secrets.SSH_HOST}} > ~/.ssh/known_hosts
             git clone git@github.com:sbongiorno9/cyber-guardian-backend.git
             echo 'Deployment to Digital Ocean Succeeded'
