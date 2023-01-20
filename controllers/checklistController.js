@@ -33,7 +33,7 @@ exports.createChecklist = (req, res) => {
             author: author,
             content: content,
             images: images
-        })
+    })
         
     newChecklist.save()
         .then( checklist => {

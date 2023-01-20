@@ -9,10 +9,10 @@ learningPathRouter.get('/', learningPathController.getLearningPaths)
 
 learningPathRouter.get('/:id', learningPathController.getOneLearningPath)
 
-learningPathRouter.post('/', jsonParser, learningPathController.createLearningPath)
+learningPathRouter.post('/', verifyJWT, jsonParser, learningPathController.createLearningPath)
 
-learningPathRouter.patch('/:id', learningPathController.updateLearningPath)
+learningPathRouter.patch('/:id', verifyJWT, learningPathController.updateLearningPath)
 
-learningPathRouter.delete('/:id', learningPathController.deleteLearningPath)
+learningPathRouter.delete('/:id', verifyJWT, learningPathController.deleteLearningPath)
 
 module.exports = learningPathRouter
