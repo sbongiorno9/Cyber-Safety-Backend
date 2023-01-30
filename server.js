@@ -25,7 +25,7 @@ const contentRouter = require('./routers/contentRouter')
 const registerRouter = require('./routers/registerRouter') //remove before deployment
 const verifyRouter = require('./verifyRouter');
 const loginRouter = require('./routers/loginRouter');
-
+const gameRouter = require('./routers/gameRouter')
 //db connection
 mongoose.connect(DEV_URI).then(() => {
     console.log('Connected to Development Database')
@@ -43,6 +43,7 @@ app.use('/content', contentRouter)
 app.use('/register', registerRouter)
 app.use('/isAdminAuth', verifyRouter)
 app.use('/login', loginRouter)
+app.use('/games', gameRouter)
 
 const Schema = mongoose.Schema
 const demo = mongoose.model('demo', new Schema({ message: String }))

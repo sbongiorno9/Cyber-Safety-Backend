@@ -5,10 +5,10 @@ const Schema = mongoose.Schema
 const ArticleSchema = new Schema({
     title: String ,
     author: String,
+    level: String,
     content: [{
         index: Number,
         contentType: String,
-        buffer: Buffer,
         text: String
     }]
 })

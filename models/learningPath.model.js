@@ -5,10 +5,10 @@ const Schema = mongoose.Schema
 const LearningPathSchema = new Schema({
     title: String,
     author: String,
-    content: String,
-    images: [{
-        data: Buffer,
-        contentType: String
+    content: [{
+        index: Number,
+        contentType: String,
+        text: String
     }]
 })
 

@@ -23,34 +23,37 @@ exports.getOneArticle = (req, res) => {
 } 
 
 exports.createArticle = (req, res) => {
-    const title = req.params.title
-    const author = req.params.author
-    const content = req.params.content
-    const images = req.params.images
+    const title = req.body.title
+    const author = req.body.author
+    let content = req.body.content
 
-    const newArticle = Article.create({
+    const newArticle = new Article({
             title: title,
             author: author,
             content: content,
-            images: images
         })
+
+        console.log(content)
         
     newArticle.save()
         .then( article => {
             return res.status(202).json(article)
         })
         .catch( err => {
+            console.log(err)
             return res.status(502).json({message: 'Could not save article: ' + err})
         })
 }
 
-exports.updateArticle = (req, res) => {
+exports.updateArticle = async(req, res) => {
     const id = req.params.id
-
+    const update = req.body
     try{
-        Article.findOneAndUpdate(id, req.params)
+        await Article.findOneAndUpdate({_id: id}, update)
+        console.log('article updated')
         return res.status(203).json({message: 'Article Updated'})
     } catch(err){
+        console.log(err)
         return res.status(503).json({message: 'Could not update article' + err})
     }
 }
